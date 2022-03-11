@@ -1,0 +1,30 @@
+<template>
+  <h1>{error}</h1>
+   <div class="detail-box" style="width:30rem">
+        <article class="slds-tile slds-media">
+          <div class="slds-media__figure">
+            <span class="slds-avatar slds-avatar_circle slds-avatar_large">
+              <img alt="" src={data.Owner.FullPhotoUrl} title="Profile Picture"/>
+            </span>
+          </div>
+          <div class="slds-media__body">
+            <h3 class="slds-tile__title slds-truncate">
+              <a href="#">{data.Owner.Name}</a>
+            </h3>
+            <div class="slds-tile__detail">
+              <dl class="slds-list_horizontal slds-wrap">
+                <dt class="slds-item_label slds-text-color_weak slds-truncate">Id:</dt>
+                <dd class="slds-item_detail slds-truncate">{data.Id}</dd>
+                <dt class="slds-item_label slds-text-color_weak slds-truncate">Name:</dt>
+                <dd class="slds-item_detail slds-truncate">{data.Name}</dd>
+                <dt class="slds-item_label slds-text-color_weak slds-truncate">Industry:</dt>
+                <dd class="slds-item_detail slds-truncate">{data.Industry}</dd>
+                <dt class="slds-item_label slds-text-color_weak slds-truncate">Type:</dt>
+                <dd class="slds-item_detail slds-truncate">{data.Type}</dd>
+              </dl>
+            </div>
+          </div>
+        </article>
+        <lightning-button variant="brand" label="Back" onclick={handleBack} class="slds-m-left_x-small"></lightning-button>
+      </div>
+</template>
