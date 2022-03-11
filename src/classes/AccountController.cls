@@ -4,7 +4,6 @@ public with sharing class AccountController {
     try {
         List<Account> accList = [SELECT Id, Name 
                                    FROM Account LIMIT 5];
-        System.debug('Account list isze--'+accList.size());
         return accList;
       } catch (Exception e) {
           throw new AuraHandledException(e.getMessage());
