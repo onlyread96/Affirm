@@ -1,23 +1,22 @@
 <template>
-  <div class="center">
-    <h1>{error}</h1>
-    <!--Spinner-->
-    <template if:false={loaded}>
-      <div class="slds-spinner_container">
-        <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
-      </div>
-    </template>
-    <!--Main Account List-->
-    <template if:true={showListView}>
-      <div style="width: 50%;">
-        <lightning-datatable key-field="id" data={data} columns={columns} onrowaction={handleRowAction}>
-        </lightning-datatable>
-      </div>
-    </template>
-    <!--Detail Child Component List-->
-    <template if:true={showDetailView}>
-      <c-account-details detail-record-id={detailRecordId} onbackevent={handleBackEvent}
-        ondetailloaded={handleDetailLoaded}></c-account-details>
-    </template>
-  </div>
+  <!--error-->
+  <h1>{error}</h1>
+  <!--Spinner-->
+  <template if:false={loaded}>
+    <div class="slds-spinner_container">
+      <lightning-spinner alternative-text="Loading" size="large" variant="brand"></lightning-spinner>
+    </div>
+  </template>
+  <!--Main Account List-->
+  <template if:true={showListView}>
+    <div style="width: 50%;">
+      <lightning-datatable key-field="id" data={data} columns={columns} onrowaction={handleRowAction}>
+      </lightning-datatable>
+    </div>
+  </template>
+  <!--Detail Child Component List-->
+  <template if:true={showDetailView}>
+    <c-account-details detail-record-id={detailRecordId} onbackevent={handleBackEvent}
+      ondetailloaded={handleDetailLoaded}></c-account-details>
+  </template>
 </template>

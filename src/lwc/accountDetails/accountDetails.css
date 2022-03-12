@@ -1,6 +1,6 @@
 .detail-box {
   padding: 50px;
-  border: 1px solid red;
+  border: 1px solid darkgray;
   box-sizing: border-box;
   background-color: lightgray;
 }

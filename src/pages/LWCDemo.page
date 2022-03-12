@@ -1,0 +1,16 @@
+<apex:page>
+    <apex:includeLightning />
+
+    <div id="lwcvf" />
+    <!-- Lightning out -->
+    <script>
+        $Lightning.use("c:lwcdemocontainer", function() {
+          $Lightning.createComponent("c:accountList",
+              {},
+              "lwcvf",
+              function(cmp) {
+              }
+          );
+        });
+    </script>
+</apex:page>

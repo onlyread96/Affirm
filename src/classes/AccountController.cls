@@ -3,10 +3,10 @@ public with sharing class AccountController {
   public static List<Account> getAccountList(){
     try {
         List<Account> accList = [SELECT Id, Name 
-                                   FROM Account LIMIT 5];
+                                 FROM Account LIMIT 5];
         return accList;
       } catch (Exception e) {
-          throw new AuraHandledException(e.getMessage());
+          throw new AuraHandledException('Unhandled Exception in Controller-'+e.getMessage());
       }
   }
 
@@ -16,13 +16,9 @@ public with sharing class AccountController {
       Account acc = [SELECT Id, Name, Industry, Type, Owner.Name , Owner.FullPhotoUrl
                      FROM Account 
                      WHERE Id =: detailRecordId];
-      System.debug('Account query');
-        return acc;
+      return acc;
     } catch (Exception e) {
-        throw new AuraHandledException(e.getMessage());
+        throw new AuraHandledException('Unhandled Exception in Controller-'+e.getMessage());
     }
   }
-
-  
-
 }
