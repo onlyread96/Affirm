@@ -1,0 +1,121 @@
+<html>
+  <head>
+    <script src="http://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <script type="text/javascript">
+      // Do not use jQuery or any other libraries for these JavaScript questions.
+
+      // Q1) Complete this function that receives an array of numbers and returns the sum of the values in the array.
+      function sumNumberArray(numArray) {
+        return numArray.reduce(function(sum,val){
+          return sum + val;
+        },0);
+			}
+
+      console.log(sumNumberArray([1,2,3,4,5,25]));
+
+      //The following questions below will use this array of Contact objects
+      var contacts = [
+        { account: "Acme", firstName: "John", lastName: "Snow" },
+        { account: "Metal Industries", firstName: "Ted", lastName: "Smith" },
+        { account: "Acme", firstName: "Sara", lastName: "Butler" },
+        { account: "HiTech Corp", firstName: "Sam", lastName: "Johnson" },
+        { account: "HiTech Corp", firstName: "Arnold", lastName: "Williams" },
+        { account: "Metal Industries", firstName: "Jessica", lastName: "Westcoat" },
+        { account: "Acme", firstName: "Kyle", lastName: "Johnson" },
+        { account: "HiTech Corp", firstName: "Jason", lastName: "Fernandez" },
+      ];
+
+      //Given the code below.....
+      var contact = contacts[0];
+      contact.firstName = "Scott";
+
+      // Q2 ) What is the value of contacts[0].firstName? Why?
+      console.log(contacts[0].firstName);
+      //[Ans]The ouput will be 'Scott'
+      //Objects and Arrays are pass by reference, 'contacts[0]' assigns a reference to first object in array to the array.
+      //So change the firstName changes the object in the Array.  contacts[0].firstName will output 'Scott'.
+
+      //Similarly, given the following array of numbers
+      var numberArray = [3, 44, 64];
+      var num = numberArray[0];
+      num = 13;
+
+      console.log(num);
+      // Q3) What will be the value of numberArray[0]? Why?
+      //[Ans]This is primitive array. numberArray[0] assigns the value not the reference
+      //hence the output of num is '13'. numberArray[0] will return '3'
+
+      // Q4) Complete the convertAccountArrayToObject() function below that accepts an array like 'contacts' above and
+      // returns an object with the following object structure below where the key is account name and value is an array of alphabetized full names
+      var acctContactObject = {
+        Acme: ["John Snow", "Kyle Johnson", "Sara Butler"],
+        "HiTech Corp": ["Arnold Williams", "Jason Fernandez", "Sam Johnson"],
+        "Metal Industries": ["Jessica Westcoat", "Ted Smith"],
+      };
+
+      function convertAccountArrayToObject(contacts) {
+        //Return an object structured like the 'acctContactObject' object above
+        let arrayToObject = {};
+        contacts.forEach((item, i) => {
+          if(arrayToObject.hasOwnProperty(item.account)) {
+            arrayToObject[item.account].push(item.firstName + ' ' + item.lastName);
+          } else {
+            arrayToObject[item.account] = new Array(item.firstName + ' ' + item.lastName);
+          }
+        });
+        return arrayToObject;
+      }
+
+      console.log(convertAccountArrayToObject(contacts));
+
+      // Q5) See the question in the call back function
+      //[Ans] I believe, its something to do with higher-order function being available to the callback at the time of execution, not entirely sure.
+      // If accountId is changed to say '123', before the execution of callback, the log outputs '123' not '123abc' which was the value at the time async call was added to the execution context.
+      function getContacts() {
+        var accountId = "123abc";
+
+        $.get("ajax/contacts.json?id=" + accountId, function (data) {
+          //This is an asynchronous callback function
+          //This is inside an anonymous function executing asynchronously in a seperate context but it still has the ability to read the value
+          // in the 'accountId' var. Why?
+          console.log("I see you " + accountId);
+        });
+      }
+
+      // Q6) What is the difference between the == operator and the === operator? Give an example of why may use one instead of the other.
+      //[Ans]
+      // 1) '==' does a type coercion, 0 == false returns true
+      // 2) '===' checks type strictly 0 === false returns false
+
+      // Q7) What will the output of the following function be? You can easily run this function and see the output but also explain why?
+      function doTimeouts() {
+        console.log(1);
+        setTimeout(function () {
+          console.log(2);
+        }, 1000);
+        setTimeout(function () {
+          console.log(3);
+        }, 0);
+        console.log(4);
+      }
+      doTimeouts();
+      //[Ans]The output will be [1,4,3,2]
+      //The synchronous execution prints 1, 4, while placing the setTimeout function in the async execution stack.
+      //setTimeout with 0ms runs first to print 3 and the function with with 1000ms runs second to print 4.
+
+      // Q8) JavaScript includes basic string functions like toLowerCase() and toUpperCase(). JavaScript provides a mechanism to attach
+			// custom methods to core objects like String. Do what is necessary to make the commented line below work and output the reversed
+			// value of the 'productName' var.
+
+      var productName = "Smartsheet";
+      //[Ans]
+      String.prototype.reverse = function() {
+        return this.split("").reverse().join("");
+      }
+      console.log( productName.reverse() );
+    </script>
+  </head>
+  <body>
+    <p>View the source code of this page and answer the questions/complete the code.</p>
+  </body>
+</html>
